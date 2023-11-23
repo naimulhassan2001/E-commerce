@@ -1,4 +1,6 @@
 import 'package:demo_alor_feri/controller/login_controller.dart';
+import 'package:demo_alor_feri/pages/my_products.dart';
+import 'package:demo_alor_feri/pages/products_list_page.dart';
 import 'package:demo_alor_feri/widget/self_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -45,7 +47,17 @@ class LogInPage extends StatelessWidget {
               ),
               ElevatedButton(
                   onPressed: () {
-                    logInController.logIn();
+                    var navigator = logInController.logIn();
+
+                    navigator.then((value) {
+                      if (value) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MyProductsList(),
+                            ));
+                      }
+                    });
                   },
                   child: const Text("Log IN"))
             ],

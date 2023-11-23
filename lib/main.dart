@@ -1,4 +1,4 @@
-import 'package:demo_alor_feri/pages/home_page.dart';
+import 'package:demo_alor_feri/pages/my_products.dart';
 import 'package:demo_alor_feri/pages/login_page.dart';
 import 'package:demo_alor_feri/pages/products_list_page.dart';
 import 'package:demo_alor_feri/pages/users_list_pages.dart';
@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: LogInPage(),
     );
   }
 }

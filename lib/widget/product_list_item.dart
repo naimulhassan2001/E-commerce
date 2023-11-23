@@ -9,13 +9,11 @@ class ProductListItem extends StatelessWidget {
       required this.id,
       required this.index});
 
-  int id;
-
   int price;
   int index;
 
+  String id;
   String productName;
-
   String ownerName;
 
   @override
