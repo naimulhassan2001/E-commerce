@@ -16,17 +16,20 @@ class UsersListPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('User List'),
       ),
-      body: Obx(() =>usersListController.isLoading.value ?  const Center( child: CircularProgressIndicator(),)
+      body: Obx(() => usersListController.isLoading.value
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
           : ListView.builder(
-        itemCount: usersListController.usersList.length,
-        itemBuilder: (context, index) {
-          var user = usersListController.usersList[index];
-          return ListTile(
-            title: Text(user['name']),
-            subtitle: Text(user['email']),
-          );
-        },
-      )),
+              itemCount: usersListController.usersList.length,
+              itemBuilder: (context, index) {
+                var user = usersListController.usersList[index];
+                return ListTile(
+                  title: Text(user['name']),
+                  subtitle: Text(user['email']),
+                );
+              },
+            )),
     );
   }
 }

@@ -4,7 +4,6 @@ class ProductListItem extends StatelessWidget {
   ProductListItem(
       {super.key,
       required this.productName,
-      required this.ownerName,
       required this.price,
       required this.id,
       required this.index});
@@ -14,7 +13,6 @@ class ProductListItem extends StatelessWidget {
 
   String id;
   String productName;
-  String ownerName;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +43,6 @@ class ProductListItem extends StatelessWidget {
                   const SizedBox(
                     height: 4,
                   ),
-                  Text("Product Owner : $ownerName"),
                   const SizedBox(
                     height: 4,
                   ),

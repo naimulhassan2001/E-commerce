@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:demo_alor_feri/value/self_string.dart';
+import 'package:demo_alor_feri/value/string.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 

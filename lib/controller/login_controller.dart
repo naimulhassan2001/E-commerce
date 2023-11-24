@@ -1,26 +1,21 @@
 import 'dart:convert';
-
-import 'package:demo_alor_feri/pages/my_products.dart';
 import 'package:demo_alor_feri/pages/products_list_page.dart';
-import 'package:demo_alor_feri/pages/users_list_pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../value/self_string.dart';
+import '../value/string.dart';
 import 'package:http/http.dart' as http;
 
 class LogInController extends GetxController {
-  var access_token = "".obs;
+  var accessToken = "".obs;
 
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final RxBool isLoading = false.obs;
 
-  Future<bool> logIn() async {
+  Future<void> logIn() async {
     try {
       isLoading.value = true;
-      print(emailController.text);
-      print(passwordController.text);
 
       final url = Uri.parse("${SelfString.serverUrl}${SelfString.login}");
 
@@ -34,22 +29,17 @@ class LogInController extends GetxController {
         "password": passwordController.text.trim()
       };
 
-
       var response =
           await http.post(url, body: jsonEncode(body), headers: header);
       isLoading.value = false;
 
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
-        access_token.value = data['access_token'];
-        print(access_token.value) ;
-        return true ;
+        accessToken.value = data['access_token'];
+        Get.offAll(ProductsListPage());
 
         Get.to(() => ProductsListPage());
-      } else {
-        print('error');
-      }
+      } else {}
     } catch (e) {}
-    return false ;
   }
 }

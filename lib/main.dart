@@ -1,8 +1,6 @@
-import 'package:demo_alor_feri/pages/my_products.dart';
 import 'package:demo_alor_feri/pages/login_page.dart';
-import 'package:demo_alor_feri/pages/products_list_page.dart';
-import 'package:demo_alor_feri/pages/users_list_pages.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       home: LogInPage(),
     );
   }

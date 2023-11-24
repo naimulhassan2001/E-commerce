@@ -1,18 +1,14 @@
-
-
 import 'dart:convert';
 
 import 'package:get/get.dart';
 
-import '../value/self_string.dart';
+import '../value/string.dart';
 import 'package:http/http.dart' as http;
 
-class ProductListController extends GetxController{
+class ProductListController extends GetxController {
+  final RxList productsList = [].obs;
 
-  final RxList productsList= [].obs ;
-  final RxBool isLoading = false.obs ;
-
-
+  final RxBool isLoading = false.obs;
 
   Future<void> fetchProductList() async {
     try {
@@ -29,7 +25,4 @@ class ProductListController extends GetxController{
       } else {}
     } catch (e) {}
   }
-
-
-
 }

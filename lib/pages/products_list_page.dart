@@ -27,7 +27,6 @@ class ProductsListPage extends StatelessWidget {
                 return ProductListItem(
                   productName: user['name'],
                   price: user['price'],
-                  ownerName: user['user']['name'],
                   id: user['id'],
                   index: index,
                 );
