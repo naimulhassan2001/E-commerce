@@ -1,3 +1,4 @@
+import 'package:demo_alor_feri/value/const_image.dart';
 import 'package:flutter/material.dart';
 
 class CustomBackground extends StatelessWidget {
@@ -11,7 +12,7 @@ class CustomBackground extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/image/background.png"),
+                image: AssetImage(ConstImage.background),
                 fit: BoxFit.fill)),
         child: child,
       ),

@@ -1,6 +1,8 @@
 import 'package:demo_alor_feri/controller/login_controller.dart';
+import 'package:demo_alor_feri/pages/home.dart';
 import 'package:demo_alor_feri/pages/registration_page.dart';
-import 'package:demo_alor_feri/value/string.dart';
+import 'package:demo_alor_feri/value/const_image.dart';
+import 'package:demo_alor_feri/value/const_string.dart';
 import 'package:demo_alor_feri/widget/app_logo_widget.dart';
 import 'package:demo_alor_feri/widget/custom_button.dart';
 import 'package:demo_alor_feri/widget/custom_background.dart';
@@ -18,22 +20,22 @@ class LogInPage extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
 
     return CustomBackground(
-        child: Column(
-      children: [
-        SizedBox(height: height * 0.1),
-        const AppLogoWidget(),
-        const SizedBox(height: 20),
-        const Text(
-          SelfString.logInHint,
-          style: TextStyle(
-              fontSize: 16,
-              color: Colors.white,
-              fontStyle: FontStyle.normal,
-              decoration: TextDecoration.none),
-        ),
-        Expanded(
+        child: Center(
           child: SingleChildScrollView(
-            child: Padding(
+            child: Column(
+      children: [
+            SizedBox(height: height * 0.05),
+            const AppLogoWidget(),
+            const SizedBox(height: 20),
+            const Text(
+              ConstString.logInHint,
+              style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontStyle: FontStyle.normal,
+                  decoration: TextDecoration.none),
+            ),
+            Padding(
                 padding: const EdgeInsets.all(20),
                 child: Container(
                   decoration: BoxDecoration(
@@ -62,7 +64,7 @@ class LogInPage extends StatelessWidget {
                         height: 20,
                       ),
                       CustomTextField(
-                        title: "E-mail",
+                        title: ConstString.email,
                         controller: logInController.emailController,
                         horizontal: 20,
                       ),
@@ -70,7 +72,7 @@ class LogInPage extends StatelessWidget {
                         height: 20,
                       ),
                       CustomTextField(
-                        title: "Password",
+                        title: ConstString.password,
                         controller: logInController.passwordController,
                         horizontal: 20,
                       ),
@@ -83,7 +85,7 @@ class LogInPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             Text(
-                              'Forget Password',
+                              ConstString.forgetPassword,
                               style: TextStyle(color: Colors.blue),
                             )
                           ],
@@ -93,9 +95,10 @@ class LogInPage extends StatelessWidget {
                         height: 20,
                       ),
                       CustomButton(
-                        title: "Log In",
+                        title: ConstString.logIn,
                         onTap: () {
-                          logInController.logIn();
+                            logInController.logIn();
+                          // Get.to(Home()) ;
                         },
                       ),
                       const SizedBox(
@@ -107,7 +110,7 @@ class LogInPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Create anew account',
+                              ConstString.createNewAccount,
                               style: TextStyle(color: Colors.blue),
                             )
                           ],
@@ -117,7 +120,7 @@ class LogInPage extends StatelessWidget {
                         height: 20,
                       ),
                       CustomButton(
-                          title: "Sign Up",
+                          title: ConstString.signUp,
                           color: Colors.teal,
                           onTap: () {
                             Get.to(RegistrationPage());
@@ -131,7 +134,7 @@ class LogInPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Log with',
+                              ConstString.logWith,
                               style: TextStyle(color: Colors.blue),
                             )
                           ],
@@ -149,7 +152,7 @@ class LogInPage extends StatelessWidget {
                                 radius: 25,
                                 backgroundColor: Colors.grey[300],
                                 child: Image.asset(
-                                    "assets/image/google_logo.png",
+                                    ConstImage.google,
                                     width: 30,
                                     height: 30)),
                           ),
@@ -159,7 +162,7 @@ class LogInPage extends StatelessWidget {
                                 radius: 25,
                                 backgroundColor: Colors.grey[300],
                                 child: Image.asset(
-                                    "assets/image/facebook_logo.png",
+                                    ConstImage.facebook,
                                     width: 30,
                                     height: 30)),
                           ),
@@ -169,7 +172,7 @@ class LogInPage extends StatelessWidget {
                                 radius: 25,
                                 backgroundColor: Colors.grey[300],
                                 child: Image.asset(
-                                    "assets/image/twitter_logo.png",
+                                    ConstImage.twitter,
                                     width: 30,
                                     height: 30)),
                           ),
@@ -181,9 +184,9 @@ class LogInPage extends StatelessWidget {
                     ],
                   ),
                 )),
-          ),
-        ),
       ],
-    ));
+    ),
+          ),
+        ));
   }
 }

@@ -1,12 +1,13 @@
 import 'dart:convert';
-import 'package:demo_alor_feri/pages/products_list_page.dart';
+import 'package:demo_alor_feri/pages/home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
-import '../value/string.dart';
+import '../value/const_string.dart';
 import 'package:http/http.dart' as http;
 
 class LogInController extends GetxController {
+
   var accessToken = "".obs;
 
   final TextEditingController emailController = TextEditingController();
@@ -17,7 +18,7 @@ class LogInController extends GetxController {
     try {
       isLoading.value = true;
 
-      final url = Uri.parse("${SelfString.serverUrl}${SelfString.login}");
+      final url = Uri.parse("${ConstString.serverUrl}${ConstString.loginApi}");
 
       var header = {"Content-Type": "application/json"};
 
@@ -36,9 +37,7 @@ class LogInController extends GetxController {
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
         accessToken.value = data['access_token'];
-        Get.offAll(ProductsListPage());
-
-        Get.to(() => ProductsListPage());
+        Get.offAll(Home());
       } else {}
     } catch (e) {}
   }

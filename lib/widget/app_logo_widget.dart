@@ -1,3 +1,4 @@
+import 'package:demo_alor_feri/value/const_image.dart';
 import 'package:flutter/material.dart';
 
 class AppLogoWidget extends StatelessWidget {
@@ -11,7 +12,7 @@ class AppLogoWidget extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Image.asset(
-            "assets/image/app_logo.png",
+            ConstImage.appLogo,
             height: 60,
             width: 60,
           ),

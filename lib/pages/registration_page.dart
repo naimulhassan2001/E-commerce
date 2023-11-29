@@ -2,7 +2,7 @@ import 'package:demo_alor_feri/controller/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../value/string.dart';
+import '../value/const_string.dart';
 import '../widget/app_logo_widget.dart';
 import '../widget/custom_button.dart';
 import '../widget/custom_background.dart';
@@ -24,7 +24,7 @@ class RegistrationPage extends StatelessWidget {
         const AppLogoWidget(),
         const SizedBox(height: 20),
         const Text(
-          SelfString.registrationHint,
+          ConstString.registrationHint,
           style: TextStyle(
               fontSize: 16,
               color: Colors.white,
@@ -62,7 +62,7 @@ class RegistrationPage extends StatelessWidget {
                         height: 20,
                       ),
                       CustomTextField(
-                        title: "Name",
+                        title: ConstString.name,
                         controller: registrationController.nameController,
                         horizontal: 20,
                       ),
@@ -70,7 +70,7 @@ class RegistrationPage extends StatelessWidget {
                         height: 10,
                       ),
                       CustomTextField(
-                        title: "E-mail",
+                        title: ConstString.email,
                         controller: registrationController.emailController,
                         horizontal: 20,
                       ),
@@ -78,7 +78,7 @@ class RegistrationPage extends StatelessWidget {
                         height: 10,
                       ),
                       CustomTextField(
-                        title: "Password",
+                        title: ConstString.password,
                         controller: registrationController.passwordController,
                         horizontal: 20,
                       ),
@@ -95,12 +95,12 @@ class RegistrationPage extends StatelessWidget {
                           const Padding(
                             padding: EdgeInsets.only(right: 20),
                             child:
-                                Expanded(child: Text(SelfString.privacyPolicy)),
+                                Expanded(child: Text(ConstString.privacyPolicy)),
                           )
                         ],
                       ),
                       CustomButton(
-                        title: "Sign Up",
+                        title: ConstString.signUp,
                         onTap: () {
                           registrationController.registration();
                         },
@@ -114,7 +114,7 @@ class RegistrationPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              'Already have an account?',
+                              ConstString.alreadyHavAccount,
                               style: TextStyle(color: Colors.black),
                             ),
                             TextButton(
@@ -122,7 +122,7 @@ class RegistrationPage extends StatelessWidget {
                                   Get.back();
                                 },
                                 child: const Text(
-                                  'Log In',
+                                  ConstString.logIn,
                                   style: TextStyle(
                                       color: Colors.red, fontSize: 18),
                                 ))

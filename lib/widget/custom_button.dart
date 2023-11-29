@@ -7,14 +7,18 @@ class CustomButton extends StatelessWidget {
       this.color = Colors.red,
       required this.title,
       this.horizontal = 20,
+      this.height = 50,
+        this.fontSize = 18,
+        this.radius =0,
       required this.onTap});
 
   Color color;
   String title;
-
   double horizontal;
-
   Function() onTap;
+  double height;
+  double fontSize;
+  double radius;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +27,13 @@ class CustomButton extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: Container(
-          height: 50,
-          color: color,
+          height: height,
+          decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(radius)),
           child: Center(
               child: Text(title,
-                  style: const TextStyle(color: Colors.white, fontSize: 18))),
+                  style: TextStyle(color: Colors.white, fontSize: fontSize))),
         ),
       ),
     );
