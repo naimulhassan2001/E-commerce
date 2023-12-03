@@ -16,6 +16,7 @@ class ConstImage {
   static const String bkash = "assets/image/bkash_logo.png";
   static const String nagad = "assets/image/nagad_logo.png";
   static const String stripe = "assets/image/stripe_logo.png";
+  static const String subtract = "assets/image/subtract.png";
 
 
 

@@ -21,7 +21,6 @@ class ProductsListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     hiveController.saveCart() ;
-    productListController.fetchProductList();
     return Scaffold(
         body: SafeArea(
       child: Column(
@@ -115,7 +114,7 @@ class ProductsListPage extends StatelessWidget {
                         child: CircularProgressIndicator(),
                       )
                           : GridView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: productListController.productsList.length,
                         gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
@@ -129,8 +128,9 @@ class ProductsListPage extends StatelessWidget {
                                   id: product.id,
                                   name: product.name,
                                   price: product.price,
-                                  stock_quantity: product.stockQuantity,
-                                  url: product.url
+                                  stock_quantity:
+                                  product.stockQuantity,
+                                  url: product.url,
 
                               ));
                             },

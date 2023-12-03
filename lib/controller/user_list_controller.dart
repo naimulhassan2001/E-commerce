@@ -11,6 +11,11 @@ class SellerListController extends GetxController {
   RxBool isLoading = false.obs;
 
 
+  @override
+  onInit() {
+    fetchUsersLList() ;
+    super.onInit();
+  }
 
 
   Future<void> fetchUsersLList() async {

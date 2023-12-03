@@ -1,30 +1,33 @@
-import 'package:demo_alor_feri/controller/cart_controller.dart';
-import 'package:demo_alor_feri/model/note_model.dart';
-import 'package:demo_alor_feri/pages/home.dart';
-import 'package:demo_alor_feri/pages/payment_page.dart';
+
+
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import '../controller/my_products_controller.dart';
 import '../value/const_image.dart';
 import '../value/const_string.dart';
 
-class CartItem extends StatelessWidget {
-  CartItem({
+class MyProductListItem extends StatelessWidget {
+  MyProductListItem({
     super.key,
     required this.id,
     required this.name,
     required this.url,
     required this.price,
     required this.stock,
+    required this.token,
+
   });
+
 
   String id;
   String name;
   String url;
   int price;
   int stock;
+  String token ;
 
-  CartController cartController = Get.put(CartController());
+  MyProductsController myProductsController = Get.put(MyProductsController()) ;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +42,12 @@ class CartItem extends StatelessWidget {
               child: Container(
                   child: url.isNotEmpty
                       ? Image.network(
-                          "${ConstString.serverUrl}$url",
-                          fit: BoxFit.cover,
-                        )
+                    "${ConstString.serverUrl}$url",
+                    fit: BoxFit.cover,
+                  )
                       : Image.asset(ConstImage.blank)),
             ),
-            Expanded(
+            Expanded (
               flex: 7,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -60,6 +63,21 @@ class CartItem extends StatelessWidget {
                       height: 6,
                     ),
                     Text("Priice: $price \৳"),
+                    Row(
+                      children: [
+                        SingleChildScrollView(child: Text("${ConstString.stock}: $stock " )),
+                        const Spacer() ,
+                        GestureDetector(
+                          onTap: (){},
+                            child: const Icon(Icons.edit_calendar_rounded)),
+                        const SizedBox(width: 20,),
+                        GestureDetector(
+                          onTap: (){
+                            myProductsController.deleteMyProduct(token, id) ;
+                          },
+                            child: const Icon(Icons.delete))
+                      ],
+                    ),
                   ],
                 ),
               ),
@@ -67,6 +85,6 @@ class CartItem extends StatelessWidget {
           ],
         ),
       ),
-    );
+    );;
   }
 }

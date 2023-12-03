@@ -1,6 +1,8 @@
 
 
+import 'package:demo_alor_feri/controller/product_detail_controller.dart';
 import 'package:demo_alor_feri/pages/payment_page.dart';
+import 'package:demo_alor_feri/value/const_image.dart';
 import 'package:demo_alor_feri/value/const_string.dart';
 import 'package:demo_alor_feri/widget/custom_button.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +11,8 @@ import 'package:get/get.dart';
 import '../controller/cart_controller.dart';
 import '../model/boxes.dart';
 import '../model/note_model.dart';
+import 'cart_page.dart';
+import 'home.dart';
 
 class ProductDetailPage extends StatelessWidget {
   ProductDetailPage({
@@ -29,8 +33,11 @@ class ProductDetailPage extends StatelessWidget {
   int price ;
   bool value ;
 
+  ProductDetailsController productDetailsController = Get.put(ProductDetailsController()) ;
 
-  CartController hiveController = Get.put(CartController());
+
+
+  CartController cartController = Get.put(CartController());
 
 
 
@@ -38,7 +45,28 @@ class ProductDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height ;
     return Scaffold(
-      appBar: AppBar(title: Text(name),),
+      appBar: AppBar(
+        title: Text(name),
+        actions: [
+          GestureDetector(
+              onTap: (){
+                Get.to(CartPage()) ;
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 16),
+                child: Row(
+                  children: [
+                    const Icon(Icons.shopping_cart_outlined),
+                    Align(alignment: Alignment.topRight,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Obx(() => Text("${cartController.number.value}", style: const TextStyle(fontSize: 14))),
+                        ))
+                  ],
+                ),
+              )),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -57,6 +85,27 @@ class ProductDetailPage extends StatelessWidget {
                     Text("Price: $price ৳",  style: const TextStyle(fontSize: 18)),
                     Text("available: $stock_quantity", style: const TextStyle(fontSize: 18)),
 
+                    const SizedBox(height: 10),
+
+                    Obx(() => Row(
+                      children: [
+
+                        GestureDetector(
+                            onTap: (){
+                              productDetailsController.decrement() ;
+                            },
+                            child: Image.asset(ConstImage.subtract, width: 20, height: 20,)),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Text("${productDetailsController.value.value}"),
+                        ),
+                        GestureDetector(
+                            onTap: (){
+                              productDetailsController.increment() ;
+                            },
+                            child: const Icon(Icons.add_circle))
+                      ],
+                    ))
 
 
 
@@ -92,20 +141,24 @@ class ProductDetailPage extends StatelessWidget {
                         box.add(data) ;
 
                         print(box.length) ;
-                        hiveController.saveCart();
+                        cartController.saveCart();
 
 
                       },
 
 
-                    ),
+                    )
                   ),
                   Expanded(
                     flex: 2,
                     child: CustomButton(
                       title: "Buy Now",
                       onTap: (){
-                        Get.to(Payment( price: price));
+                        Get.to(Payment( price: price, onTap: (){
+                          Get.snackbar(ConstString.payment, ConstString.paymentSuccessful);
+
+                          Get.offAll(Home()) ;
+                        },));
                       },
                       color: Colors.blue,
                       horizontal: 4,

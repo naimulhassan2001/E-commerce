@@ -2,6 +2,7 @@ import 'package:demo_alor_feri/controller/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../value/const_image.dart';
 import '../value/const_string.dart';
 import '../widget/app_logo_widget.dart';
 import '../widget/custom_button.dart';
@@ -105,8 +106,55 @@ class RegistrationPage extends StatelessWidget {
                           registrationController.registration();
                         },
                       ),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 20, left: 20, top: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              ConstString.signUpWith,
+                              style: TextStyle(color: Colors.blue),
+                            )
+                          ],
+                        ),
+                      ),
                       const SizedBox(
                         height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Colors.grey[300],
+                                child: Image.asset(
+                                    ConstImage.google,
+                                    width: 30,
+                                    height: 30)),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Colors.grey[300],
+                                child: Image.asset(
+                                    ConstImage.facebook,
+                                    width: 30,
+                                    height: 30)),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 10),
+                            child: CircleAvatar(
+                                radius: 25,
+                                backgroundColor: Colors.grey[300],
+                                child: Image.asset(
+                                    ConstImage.twitter,
+                                    width: 30,
+                                    height: 30)),
+                          ),
+                        ],
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 20, left: 20),

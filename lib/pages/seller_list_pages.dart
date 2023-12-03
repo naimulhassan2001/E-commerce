@@ -12,7 +12,6 @@ class SellerListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    sellerListController.fetchUsersLList();
 
     return Scaffold(
       appBar: AppBar(

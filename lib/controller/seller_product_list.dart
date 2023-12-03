@@ -23,6 +23,7 @@ class SellerProductController extends GetxController {
   Future<void> fetchSellerProduct( String id) async {
     try {
 
+      sellerProductList.value = [] ;
       isLoading.value = true;
       final url = Uri.parse("${ConstString.serverUrl}${ConstString.userApi}/$id/products");
 

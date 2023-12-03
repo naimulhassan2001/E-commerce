@@ -1,4 +1,7 @@
 class ConstString {
+
+  static const String appName = "Super Market";
+
   static const String serverUrl = "https://demo.alorferi.com";
 
   static const String userApi = "/api/users";
@@ -18,7 +21,8 @@ class ConstString {
   static const String logIn = "Log In";
   static const String createNewAccount = "Create anew account";
   static const String signUp = "Sign Up";
-  static const String logWith = "Log with";
+  static const String logWith = "Log In with";
+  static const String signUpWith = "Sign Up with";
   static const String home = "Home";
   static const String myProducts = "My Products";
   static const String cart = "Cart";
@@ -38,6 +42,20 @@ class ConstString {
   static const String nagad = "Nagad";
   static const String stripe = "Stripe";
   static const String submit = "Submit";
+  static const String paymentSuccessful = "Payment Successful";
+  static const String cartIsEmpty = "Cart is Empty";
+  static const String myProductList = "My Product List";
+  static const String addProduct = "Add Product";
+  static const String productName = "Product Name";
+  static const String price = "Price";
+  static const String stock = "Stock";
+  static const String canecl = "Canecl";
+  static const String add = "Add";
+  static const String updateApi = "?_method=PUT";
+  static const String updateProduct = "Update Product";
+  static const String update = "Update";
+  static const String skip = "Skip";
+
 
 
 

@@ -1,6 +1,6 @@
 
 
-import 'package:demo_alor_feri/model/note_model.dart';
+import 'package:demo_alor_feri/controller/payment_controller.dart';
 import 'package:demo_alor_feri/value/const_image.dart';
 import 'package:demo_alor_feri/value/const_string.dart';
 import 'package:demo_alor_feri/widget/custom_button.dart';
@@ -11,15 +11,20 @@ class Payment extends StatelessWidget {
   Payment({
     super.key,
     required this.price,
+    required this.onTap,
   });
 
   num price;
+  Function() onTap ;
+
+  PaymentController paymentController = Get.put(PaymentController()) ;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(ConstString.payment),
+        title: const Text(ConstString.payment),
       ),
 
       body: Padding(
@@ -27,9 +32,9 @@ class Payment extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 50,),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: const Align(alignment: Alignment.center,
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Align(alignment: Alignment.center,
                   child: Text(ConstString.makePayment, style: TextStyle(fontSize: 18),)),
             ),
             const SizedBox(height: 20,),
@@ -44,6 +49,10 @@ class Payment extends StatelessWidget {
             Row(
               children: [
 
+                Obx(() => Checkbox(value: paymentController.bkash.value,
+                    onChanged: (value) {
+                      paymentController.valueBkash(value) ;
+                    })),
                 Image.asset(ConstImage.bkash, width: 50, height: 50,),
                 const SizedBox(width: 10,),
                 const Text(ConstString.bkash),
@@ -53,6 +62,10 @@ class Payment extends StatelessWidget {
 
             Row(
               children: [
+                Obx(() => Checkbox(value: paymentController.nagad.value,
+                    onChanged: (value) {
+                      paymentController.valueNagad(value) ;
+                    })),
                 Image.asset(ConstImage.nagad, width: 50, height: 50,),
                 const SizedBox(width: 10,),
                 const Text(ConstString.nagad)
@@ -62,6 +75,10 @@ class Payment extends StatelessWidget {
 
             Row(
               children: [
+                Obx(() => Checkbox(value: paymentController.stripe.value,
+                    onChanged: (value) {
+                      paymentController.valueStripe(value) ;
+                    })),
                 Image.asset(ConstImage.stripe, width: 50, height: 50,),
                 const SizedBox(width: 10,),
                 const Text(ConstString.stripe)
@@ -74,10 +91,7 @@ class Payment extends StatelessWidget {
               width: 150,
               child: CustomButton(
                   title: ConstString.submit,
-                  onTap: (){
-                    // notesModel.delete();
-                    Get.back() ;
-                  },
+                  onTap: onTap,
 
 
 

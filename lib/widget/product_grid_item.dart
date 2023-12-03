@@ -1,6 +1,11 @@
 import 'package:demo_alor_feri/value/const_image.dart';
 import 'package:flutter/material.dart';
 import 'package:demo_alor_feri/value/const_string.dart';
+import 'package:get/get.dart';
+
+import '../controller/cart_controller.dart';
+import '../model/boxes.dart';
+import '../model/note_model.dart';
 
 class ProductGridItem extends StatelessWidget {
   ProductGridItem(
@@ -19,6 +24,9 @@ class ProductGridItem extends StatelessWidget {
   String id;
   String productName;
   String url;
+
+
+  CartController cartController = Get.put(CartController());
 
   @override
   Widget build(BuildContext context) {
@@ -39,13 +47,13 @@ class ProductGridItem extends StatelessWidget {
                       : Image.asset(ConstImage.blank)),
             ),
             Expanded(
-                flex: 3,
+                flex: 6,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Text(productName)),
@@ -59,7 +67,27 @@ class ProductGridItem extends StatelessWidget {
                           alignment: Alignment.topLeft,
                           child: Text("${ConstString.available}: ${stock.toString()}", maxLines: 1,)),
 
-                      SizedBox(height: 10,)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(onPressed: (){
+
+
+                            final data = NotesModel(id: id, name: productName, url: url, price: price, stock_quantity: stock) ;
+
+                            final box = Boxes.getData() ;
+                            box.add(data) ;
+
+                            cartController.saveCart();
+
+
+
+
+                          }, child: const Text(ConstString.addCart)),
+                        ],
+                      ),
+
+                      const SizedBox(height: 6,)
                     ],
                   ),
                 ))

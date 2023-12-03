@@ -16,11 +16,16 @@ class ProductListController extends GetxController {
   final RxList productsList = [].obs;
   RxInt indexNumber = 0.obs ;
 
+
   final RxBool isLoading = false.obs;
 
   final RxDouble gridHeight = 0.0.obs;
 
-
+  @override
+  void onInit() {
+    fetchProductList();
+    super.onInit();
+  }
 
 
 
