@@ -1,4 +1,5 @@
 import 'package:demo_alor_feri/pages/login_page.dart';
+import 'package:demo_alor_feri/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';

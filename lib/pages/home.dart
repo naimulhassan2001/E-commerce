@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
   CartController cartController = Get.put(CartController());
   LogInController logInController = Get.put(LogInController());
 
-  List pages = [ProductsListPage(), SellerListPage(), const ProfilePage()];
+  List pages = [ProductsListPage(), const ProfilePage()];
 
   @override
   Widget build(BuildContext context) {
@@ -50,14 +50,7 @@ class Home extends StatelessWidget {
                     style: TextStyle(fontSize: 12)),
               ],
             ),
-            Column(
-              children: [
-                Icon(Icons.group),
-                Text(ConstString.seller,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 12)),
-              ],
-            ),
+
             Column(
               children: [
                 Icon(
@@ -100,7 +93,6 @@ class Home extends StatelessWidget {
         ],
       ),
       drawer: Drawer(
-        backgroundColor: Colors.blue,
         child: ListView(
           children: [
             ListTile(
