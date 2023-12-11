@@ -1,8 +1,6 @@
-
-
-import 'package:demo_alor_feri/value/const_image.dart';
 import 'package:flutter/material.dart';
 
+import '../value/const_image.dart';
 import '../value/const_string.dart';
 
 class SellerGirdViewItem extends StatelessWidget {
@@ -20,18 +18,20 @@ class SellerGirdViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child:Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             flex: 7,
-            child: Container(
-                child: url.isNotEmpty
-                    ? Image.network(
-                  "${ConstString.serverUrl}$url",
-                  fit: BoxFit.cover,
-                )
-                    : Image.asset(ConstImage.profile)),
+            child: Center(
+              child: Container(
+                  child: url.isNotEmpty
+                      ? Image.network(
+                          "${ConstString.serverUrl}$url",
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(ConstImage.profile)),
+            ),
           ),
           Expanded(
               flex: 2,
@@ -40,10 +40,12 @@ class SellerGirdViewItem extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Spacer(),
-                    Text(name, maxLines: 2),
+                    const Spacer(),
+                    SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(name, maxLines: 1)),
                     const SizedBox(
-                      height: 10,
+                      height: 6,
                     ),
                   ],
                 ),

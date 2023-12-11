@@ -8,8 +8,8 @@ class CustomButton extends StatelessWidget {
       required this.title,
       this.horizontal = 20,
       this.height = 50,
-        this.fontSize = 18,
-        this.radius =0,
+      this.fontSize = 18,
+      this.radius = 0,
       required this.onTap});
 
   Color color;
@@ -29,8 +29,7 @@ class CustomButton extends StatelessWidget {
         child: Container(
           height: height,
           decoration: BoxDecoration(
-              color: color,
-              borderRadius: BorderRadius.circular(radius)),
+              color: color, borderRadius: BorderRadius.circular(radius)),
           child: Center(
               child: Text(title,
                   style: TextStyle(color: Colors.white, fontSize: fontSize))),

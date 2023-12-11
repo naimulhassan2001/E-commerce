@@ -5,6 +5,7 @@ class ConstString {
   static const String serverUrl = "https://demo.alorferi.com";
 
   static const String userApi = "/api/users";
+  static const String registrationApi = "/api/register";
   static const String productApi = "/api/products";
   static const String loginApi = "/oauth/token";
   static const String myProductsApi = "/api/my-products";
@@ -17,6 +18,7 @@ class ConstString {
   static const String search = "Search....";
   static const String email = "E-mail....";
   static const String password = "Password....";
+  static const String conformPassword = "Conform Password....";
   static const String forgetPassword = "Forget Password";
   static const String logIn = "Log In";
   static const String createNewAccount = "Create anew account";
@@ -49,12 +51,30 @@ class ConstString {
   static const String productName = "Product Name";
   static const String price = "Price";
   static const String stock = "Stock";
-  static const String canecl = "Canecl";
+  static const String cancel = "Cancel";
   static const String add = "Add";
   static const String updateApi = "?_method=PUT";
   static const String updateProduct = "Update Product";
   static const String update = "Update";
   static const String skip = "Skip";
+  static const String productImage = "Product Image";
+  static const String pickImage = "Pick Image";
+  static const String delete = "Delete";
+  static const String deleteProduct = "Delete Product";
+  static const String sureDelete = "Are you sure delete this product";
+  static const String logOut = "Log Out";
+  static const String share = "Share";
+  static const String setting = "Setting";
+  static const String buyNow = "Buy Now";
+  static const String myProfile = "My Profile";
+  static const String quantity = "Quantity";
+  static const String total = "Total";
+  static const String description = "Description";
+  static const String reviews = "Reviews";
+  static const String support = "Support";
+  static const String myCartList = "My cart list";
+  static const String myOrders = "My Orders";
+
 
 
 

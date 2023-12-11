@@ -1,40 +1,29 @@
-
-
-
 import 'package:hive/hive.dart';
+
 part 'note_model.g.dart';
 
 @HiveType(typeId: 0)
-class NotesModel extends HiveObject{
-
+class NotesModel extends HiveObject {
   @HiveField(0)
-  String id ;
-
+  String id;
 
   @HiveField(1)
-  String name ;
+  String name;
 
   @HiveField(2)
-  String url ;
-
+  String url;
 
   @HiveField(3)
-  int price ;
-
+  int price;
 
   @HiveField(4)
-  int stock_quantity ;
+  int stock_quantity;
 
-
-
-
-  NotesModel( {
+  NotesModel({
     required this.id,
     required this.name,
     required this.url,
     required this.price,
     required this.stock_quantity,
-
-
-  }) ;
+  });
 }

@@ -1,31 +1,21 @@
-
-
-
 import 'dart:convert';
-
-import 'package:demo_alor_feri/model/product.dart';
 import 'package:get/get.dart';
 
+import '../model/product.dart';
 import '../value/const_string.dart';
-
 import 'package:http/http.dart' as http;
 
-
 class SellerProductController extends GetxController {
-
-
   RxList sellerProductList = [].obs;
 
   RxBool isLoading = false.obs;
 
-
-
-  Future<void> fetchSellerProduct( String id) async {
+  Future<void> fetchSellerProduct(String id) async {
     try {
-
-      sellerProductList.value = [] ;
+      sellerProductList.value = [];
       isLoading.value = true;
-      final url = Uri.parse("${ConstString.serverUrl}${ConstString.userApi}/$id/products");
+      final url = Uri.parse(
+          "${ConstString.serverUrl}${ConstString.userApi}/$id/products");
 
       var response = await http.get(url);
       isLoading.value = false;
@@ -35,20 +25,10 @@ class SellerProductController extends GetxController {
 
         var data = jsonData['data'];
 
-        for(var item in data) {
-          sellerProductList.add(Product.fromJson(item)) ;
+        for (var item in data) {
+          sellerProductList.add(Product.fromJson(item));
         }
-
-
-
-
-
-      } else {
-
-      }
+      } else {}
     } catch (e) {}
   }
-
-
-
 }

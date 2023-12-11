@@ -1,221 +1,140 @@
 import 'dart:convert';
 
-import 'package:demo_alor_feri/controller/login_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:super_market/controller/login_controller.dart';
 
 import '../model/product.dart';
 import '../value/const_string.dart';
 import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart' as _dio;
 
 class MyProductsController extends GetxController {
   final RxList myProductsList = [].obs;
   final RxBool isLoading = false.obs;
+  final RxBool isImage = false.obs;
 
+  TextEditingController nameController = TextEditingController();
 
+  TextEditingController priceController = TextEditingController();
 
-  TextEditingController namecontroller = TextEditingController() ;
-  TextEditingController pricecontroller = TextEditingController() ;
-  TextEditingController stockcontroller = TextEditingController() ;
-
-
-
-
+  TextEditingController stockController = TextEditingController();
 
   LogInController logInController = LogInController();
 
+  getImage(value) {
+    isImage.value = value;
+  }
 
   Future<void> fetchMyProductList(String token) async {
-
     try {
-
-      myProductsList.value = [] ;
       isLoading.value = true;
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': "Bearer $token"
       };
-      final url = Uri.parse("${ConstString.serverUrl}${ConstString.myProductsApi}");
+      final url =
+          Uri.parse("${ConstString.serverUrl}${ConstString.myProductsApi}");
 
       var response = await http.get(url, headers: headers);
       isLoading.value = false;
 
       if (response.statusCode == 200) {
+        myProductsList.value = [];
 
         var jsonData = jsonDecode(response.body);
 
-        var data= jsonData['data'];
+        var data = jsonData['data'];
 
-        for(var item in data) {
-          myProductsList.add(Product.fromJson(item)) ;
+        for (var item in data) {
+          myProductsList.add(Product.fromJson(item));
         }
-      } else {
-
-      }
-    } catch (e) {}
+      } else {}
+    } catch (e) {
+      print(e);
+    }
   }
 
-
-  Future<void> addMyProduct(String token) async {
-
+  Future<void> updateMyProduct(XFile? image, String token, String id) async {
     try {
-      Map<String, String> headers = {
-        'Content-type': 'application/json',
-        'Authorization': "Bearer $token"
-      };
+      _dio.Dio dio = _dio.Dio();
 
-      var body =   {
-          "name" : namecontroller.text,
-          "price" : pricecontroller.text,
-          "stock_quantity" : stockcontroller.text
-        }
-       ;
+      _dio.FormData fromData = _dio.FormData.fromMap({
+        'image': await _dio.MultipartFile.fromFile(image!.path),
+        'name': nameController.text,
+        'price': priceController.text,
+        'stock_quantity': stockController.text,
+      });
 
+      dio.options.headers['Authorization'] = "Bearer $token";
 
-      final url = Uri.parse("${ConstString.serverUrl}${ConstString.myProductsApi}");
+      var url =
+          "${ConstString.serverUrl}${ConstString.myProductsApi}/$id/${ConstString.updateApi}";
 
-      var response = await http.post(url, headers: headers,body: jsonEncode(body) );
-
+      _dio.Response response = await dio.post(
+        url,
+        data: fromData,
+      );
       if (response.statusCode == 200) {
-
         fetchMyProductList(token);
-        namecontroller.clear();
-        pricecontroller.clear();
-        stockcontroller.clear();
-      } else {
-
+        nameController.clear();
+        priceController.clear();
+        stockController.clear();
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
 
-
-  Future<void> updateMyProduct(String token, String id) async {
-
+  Future<void> addMyProduct(XFile? image, String token) async {
     try {
-      Map<String, String> headers = {
-        'Content-type': 'application/json',
-        'Authorization': "Bearer $token"
-      };
+      _dio.Dio dio = _dio.Dio();
 
-      var body =   {
-          "name" : namecontroller.text,
-          "price" : pricecontroller.text,
-          "stock_quantity" : stockcontroller.text
-        }
-       ;
+      _dio.FormData fromData = _dio.FormData.fromMap({
+        'image': await _dio.MultipartFile.fromFile(image!.path),
+        'name': nameController.text,
+        'price': priceController.text,
+        'stock_quantity': stockController.text,
+      });
 
+      dio.options.headers['Authorization'] = "Bearer $token";
 
-      final url = Uri.parse("${ConstString.serverUrl}${ConstString.myProductsApi}/$id/${ConstString.updateApi}");
+      var url = "${ConstString.serverUrl}${ConstString.myProductsApi}";
 
-      var response = await http.post(url, headers: headers,body: jsonEncode(body) );
-
+      _dio.Response response = await dio.post(
+        url,
+        data: fromData,
+      );
       if (response.statusCode == 200) {
-
-        print("object");
         fetchMyProductList(token);
-        namecontroller.clear();
-        pricecontroller.clear();
-        stockcontroller.clear();
-      } else {
-
-        print("hello");
-
+        nameController.clear();
+        priceController.clear();
+        stockController.clear();
       }
-    } catch (e) {}
+    } catch (e) {
+      print(e);
+    }
   }
-
 
   Future<void> deleteMyProduct(String token, String id) async {
-
     try {
       Map<String, String> headers = {
         'Content-type': 'application/json',
         'Authorization': "Bearer $token"
       };
 
-
-      final url = Uri.parse("${ConstString.serverUrl}${ConstString.myProductsApi}/$id");
+      final url =
+          Uri.parse("${ConstString.serverUrl}${ConstString.myProductsApi}/$id");
 
       var response = await http.delete(url, headers: headers);
 
       if (response.statusCode == 200) {
-
         fetchMyProductList(token);
-      } else {
-
-      }
-    } catch (e) {}
+      } else {}
+    } catch (e) {
+      print(e) ;
+    }
   }
-
-
-
-
-
-
-  Future<void> createProduct(BuildContext context) async{
-
-
-    return showDialog(
-      context: context,
-      builder: (context) {
-
-        return AlertDialog(
-          title:  const Text(ConstString.addProduct),
-          content:  SingleChildScrollView(
-            child: Column(
-              children: [
-                TextField(
-                  controller: namecontroller,
-                  decoration: InputDecoration(
-                      labelText: ConstString.productName,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)
-                      )
-                  ),
-                ),
-                const SizedBox(height: 10,),
-                TextField(
-                  controller: pricecontroller,
-                  decoration: InputDecoration(
-                      labelText: ConstString.price,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)
-                      )
-                  ),
-                ),
-                const SizedBox(height: 10,),
-                TextField(
-                  controller: stockcontroller,
-                  decoration: InputDecoration(
-                      labelText: ConstString.stock,
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(20)
-                      )
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(onPressed: () {
-              Navigator.pop(context) ;
-              print("object");
-            },
-                child: const Text(ConstString.canecl)),
-            TextButton(onPressed: () {
-              addMyProduct(logInController.accessToken.value ) ;
-              Navigator.pop(context) ;
-            },
-                child: const Text(ConstString.add)),
-          ],
-        );
-      },) ;
-
-
-
-
-  }
-
-
 }

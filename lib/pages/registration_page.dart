@@ -1,7 +1,7 @@
-import 'package:demo_alor_feri/controller/registration_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../controller/registration_controller.dart';
 import '../value/const_image.dart';
 import '../value/const_string.dart';
 import '../widget/app_logo_widget.dart';
@@ -14,6 +14,9 @@ class RegistrationPage extends StatelessWidget {
 
   RegistrationController registrationController =
       Get.put(RegistrationController());
+
+  final GlobalKey<FormState> _formKey = GlobalKey();
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,138 +52,150 @@ class RegistrationPage extends StatelessWidget {
                         ),
                       ],
                       borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    children: [
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Obx(() => Center(
-                            child: registrationController.isLoading.value
-                                ? const CircularProgressIndicator()
-                                : null,
-                          )),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      CustomTextField(
-                        title: ConstString.name,
-                        controller: registrationController.nameController,
-                        horizontal: 20,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(
-                        title: ConstString.email,
-                        controller: registrationController.emailController,
-                        horizontal: 20,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CustomTextField(
-                        title: ConstString.password,
-                        controller: registrationController.passwordController,
-                        horizontal: 20,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        children: [
-                          Obx(() => Checkbox(
-                              value: registrationController.check.value,
-                              onChanged: (value) {
-                                registrationController.check.value = value!;
-                              })),
-                          const Padding(
-                            padding: EdgeInsets.only(right: 20),
-                            child:
-                                Expanded(child: Text(ConstString.privacyPolicy)),
-                          )
-                        ],
-                      ),
-                      CustomButton(
-                        title: ConstString.signUp,
-                        onTap: () {
-                          registrationController.registration();
-                        },
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(right: 20, left: 20, top: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: [
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Obx(() => Center(
+                              child: registrationController.isLoading.value
+                                  ? const CircularProgressIndicator()
+                                  : null,
+                            )),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CustomTextField(
+                          validator: true,
+                          title: ConstString.name,
+                          controller: registrationController.nameController,
+                          horizontal: 20,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          validator: true,
+                          title: ConstString.email,
+                          controller: registrationController.emailController,
+                          horizontal: 20,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        CustomTextField(
+                          validator: true,
+                          title: ConstString.password,
+                          controller: registrationController.passwordController,
+                          horizontal: 20,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        CustomTextField(
+                          validator: true,
+                          title: ConstString.conformPassword,
+                          controller:
+                              registrationController.conformPasswordController,
+                          horizontal: 20,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
                           children: [
-                            Text(
-                              ConstString.signUpWith,
-                              style: TextStyle(color: Colors.blue),
+                            Obx(() => Checkbox(
+                                value: registrationController.check.value,
+                                onChanged: (value) {
+                                  registrationController.check.value = value!;
+                                })),
+                            const Padding(
+                              padding: EdgeInsets.only(right: 20),
+                              child: Text(ConstString.privacyPolicy),
                             )
                           ],
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: CircleAvatar(
-                                radius: 25,
-                                backgroundColor: Colors.grey[300],
-                                child: Image.asset(
-                                    ConstImage.google,
-                                    width: 30,
-                                    height: 30)),
+                        CustomButton(
+                          title: ConstString.signUp,
+                          onTap: () {
+                            if(_formKey.currentState!.validate()) {
+                              registrationController.registration();
+
+                            }
+                          },
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(right: 20, left: 20, top: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                ConstString.signUpWith,
+                                style: TextStyle(color: Colors.blue),
+                              )
+                            ],
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: CircleAvatar(
-                                radius: 25,
-                                backgroundColor: Colors.grey[300],
-                                child: Image.asset(
-                                    ConstImage.facebook,
-                                    width: 30,
-                                    height: 30)),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 10),
-                            child: CircleAvatar(
-                                radius: 25,
-                                backgroundColor: Colors.grey[300],
-                                child: Image.asset(
-                                    ConstImage.twitter,
-                                    width: 30,
-                                    height: 30)),
-                          ),
-                        ],
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20, left: 20),
-                        child: Row(
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
-                              ConstString.alreadyHavAccount,
-                              style: TextStyle(color: Colors.black),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor: Colors.grey[300],
+                                  child: Image.asset(ConstImage.google,
+                                      width: 30, height: 30)),
                             ),
-                            TextButton(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                child: const Text(
-                                  ConstString.logIn,
-                                  style: TextStyle(
-                                      color: Colors.red, fontSize: 18),
-                                ))
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor: Colors.grey[300],
+                                  child: Image.asset(ConstImage.facebook,
+                                      width: 30, height: 30)),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 10),
+                              child: CircleAvatar(
+                                  radius: 25,
+                                  backgroundColor: Colors.grey[300],
+                                  child: Image.asset(ConstImage.twitter,
+                                      width: 30, height: 30)),
+                            ),
                           ],
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ],
+                        Padding(
+                          padding: const EdgeInsets.only(right: 20, left: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                ConstString.alreadyHavAccount,
+                                style: TextStyle(color: Colors.black),
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  child: const Text(
+                                    ConstString.logIn,
+                                    style: TextStyle(
+                                        color: Colors.red, fontSize: 18),
+                                  ))
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ],
+                    ),
                   ),
                 )),
           ),

@@ -8,8 +8,8 @@ import '../pages/payment_page.dart';
 import '../value/const_image.dart';
 import '../value/const_string.dart';
 
-class ProductGridItem extends StatelessWidget {
-  ProductGridItem(
+class ProductDetailsGridItem extends StatelessWidget {
+  ProductDetailsGridItem(
       {super.key,
       required this.productName,
       required this.price,
@@ -36,9 +36,8 @@ class ProductGridItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 4,),
             Expanded(
-              flex: 7,
+              flex: 4,
               child: Container(
                   child: url.isNotEmpty
                       ? Center(
@@ -50,55 +49,25 @@ class ProductGridItem extends StatelessWidget {
                       : Image.asset(ConstImage.blank)),
             ),
             Expanded(
-                flex: 5,
+                flex: 2,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Spacer(),
                       SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: Text(
-                            productName,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
-                          )),
+                          child: Text(productName)),
                       const SizedBox(
                         height: 4,
                       ),
                       SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: Text("৳ ${price.toString()} ",
-                              style: const TextStyle(
-                                  fontWeight: FontWeight.bold))),
-                      Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "${ConstString.available}: ${stock.toString()}",
-                            maxLines: 1,
-                          )),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Obx(
-                            () => TextButton(
-                                onPressed: () {
-                                  if (cartController.isCartAdded.contains(id)) {
-                                    buyNow(context);
-                                  } else {
-                                    addToCart();
-                                  }
-                                },
-                                child: Text(
-                                  cartController.isCartAdded.contains(id)
-                                      ? ConstString.checkOut
-                                      : ConstString.addCart, style: const TextStyle(color: Colors.blue),
-                                )),
-                          )
-                        ],
-                      ),
-
+                          child: Text("Price: ${price.toString()} \৳")),
+                      const SizedBox(
+                        height: 6,
+                      )
                     ],
                   ),
                 ))

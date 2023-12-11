@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
       required this.controller,
       this.height = 56,
       this.suffix,
+      this.validator = false,
       this.horizontal = 0});
 
   double radius;
@@ -15,6 +16,7 @@ class CustomTextField extends StatelessWidget {
   String title;
   double height;
   Icon? suffix;
+  bool validator;
 
   TextEditingController controller;
 
@@ -22,15 +24,21 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: horizontal),
-      child: Container(
-        height: height,
-        child: TextField(
-          controller: controller,
-          decoration: InputDecoration(
-              labelText: title,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(radius))),
-        ),
+      child: TextFormField(
+        autovalidateMode: AutovalidateMode.onUserInteraction,
+        controller: controller,
+        validator: validator
+            ? (value) {
+          if (value!.isEmpty) {
+            return 'please enter $title';
+          }
+          return null;
+        }
+            : null,
+        decoration: InputDecoration(
+            labelText: title,
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(radius))),
       ),
     );
   }

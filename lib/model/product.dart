@@ -16,8 +16,6 @@ class Product {
       required this.price,
       required this.stockQuantity});
 
-
-
   factory Product.fromJson(Map<String, dynamic> json) {
     var id = json['id'] ?? "";
     var name = json['name'] ?? "item";
